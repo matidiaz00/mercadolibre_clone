@@ -9,7 +9,7 @@ export default function HeaderComponent() {
     e.preventDefault();
     const val = e.target.search.value;
     e.target.reset();
-    router.push(`/items?search=${val}`)
+    router.push(`/items?search=${val}`, null, { shallow: false })
   }
 
   return (

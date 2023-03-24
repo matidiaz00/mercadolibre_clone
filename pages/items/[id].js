@@ -1,13 +1,6 @@
+import { specificItem } from '@/services/config'
+import { setSepecificItem } from '@/services/model'
 import Head from 'next/head'
-
-const token = 'cFsnWQrDIvHRjhbmHGUpG6rByQ3tpNX8'
-const app_id = '5717639391509051'
-const api_url = (id) => `https://api.mercadolibre.com/items?ids=${id}`
-
-const headers = {
-  metod: 'GET',
-  headers: { Authentication: `Bearer ${token}` }
-}
 
 export default function DetailPage({ data }) {
   return (
@@ -15,17 +8,21 @@ export default function DetailPage({ data }) {
       <Head>
         <title>Create Next App - Detail</title>
       </Head>
-      <h1>Detail page: { data.code == 200 ? data.body.title : data.code }</h1>
+      <h1>Detail page: {data.title}</h1>
+      <p style={{whiteSpace: "pre-wrap"}}>{data.description}</p>
     </>
   )
 }
 
 export async function getServerSideProps({ params }) {
-  const res = await fetch(api_url(params.id), headers)
-  const data = await res.json()
+  
+  const response = await specificItem(params.id)
+  const json = await response.json()
+  const { item } = await setSepecificItem(json[0].body)
+
   return {
     props: {
-      data: data[0]
+      data: item
     },
   }
 }

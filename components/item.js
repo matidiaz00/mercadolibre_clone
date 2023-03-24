@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-export default function ItemComponent({ data }) {
+export default function ItemComponent({ data, index }) {
   return (
     <>
       <li>
-        <Link href={`items/${data.id}`}>{data.title}</Link>
+        {index} <Link href={`items/${data.id}`}>{data.title}</Link>
       </li>
     </>
   )

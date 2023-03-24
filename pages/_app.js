@@ -1,12 +1,12 @@
 import HeaderComponent from '@/components/header'
-import BreadcrumbsComponent from '@/components/breadcrumbs'
 import '@/styles/globals.css'
+import BreadcrumbComponent from '@/components/breadcrumbs';
 
 export default function App({ Component, pageProps }) {
   return (
     <>
       <HeaderComponent />
-      <BreadcrumbsComponent/>
+      <BreadcrumbComponent />
       <Component {...pageProps} />
     </>
   )
