@@ -71,7 +71,7 @@ export default function DetailPage({ data }) {
               </ul>
             </small>
           </aside>
-          <section className='border-top pt-4 m-4 d-md-block'>
+          <section className='border-top pt-4 m-4 d-md-none'>
             <h3>Descripción</h3>
             <p style={{whiteSpace: "pre-wrap"}}>{ data.description }</p>
           </section>
