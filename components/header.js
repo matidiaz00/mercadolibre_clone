@@ -12,19 +12,14 @@ export default function HeaderComponent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const val = e.target.search.value;
-    //e.target.reset();
-    router.push(`/items?search=${val}`, null, { shallow: false })
-  }
-
-  const resetForm = () => {
-    const e = document.getElementById("search-form")
     e.target.reset();
+    router.push(`/items?search=${val}`, null, { shallow: false })
   }
 
   return (
     <header className="bg-secondary mb-2">
       <div className="container d-flex justify-content-between align-items-center py-2">
-        <Link href='/' className="mr-3 mr-md-4" onClick={resetForm}>
+        <Link href='/' className="mr-3 mr-md-4">
           <Image
             alt="Mercado Libre logo"
             src={MeLi2x}
