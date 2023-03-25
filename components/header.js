@@ -12,21 +12,26 @@ export default function HeaderComponent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const val = e.target.search.value;
-    e.target.reset();
+    //e.target.reset();
     router.push(`/items?search=${val}`, null, { shallow: false })
   }
 
+  const resetForm = () => {
+    const e = document.getElementById("search-form")
+    e.target.reset();
+  }
+
   return (
-    <header className="bg-secondary">
+    <header className="bg-secondary mb-2">
       <div className="container d-flex justify-content-between align-items-center py-2">
-        <Link href='/' className="mr-3 mr-md-4">
+        <Link href='/' className="mr-3 mr-md-4" onClick={resetForm}>
           <Image
             alt="Mercado Libre logo"
             src={MeLi2x}
             width={134}
             height={34}
             className="d-none d-md-block"
-            priority
+            priority={false}
           />
           <Image
             alt="Mercado Libre iso logo"
@@ -34,7 +39,7 @@ export default function HeaderComponent() {
             width={51}
             height={34}
             className="d-md-none"
-            priority
+            priority={false}
           />
         </Link>
         <form onSubmit={handleSubmit} className="input-group" id="search-form">
@@ -53,7 +58,7 @@ export default function HeaderComponent() {
                 src={SearchIcon}
                 width={18}
                 height={18}
-                priority
+                priority={false}
               />
             </button>
           </div>

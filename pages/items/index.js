@@ -1,8 +1,11 @@
 import Head from 'next/head'
 import ItemComponent from '@/components/item'
+import AsideComponent from '@/components/aside'
 import { searchItems } from '@/services/config'
 import { setArrItems } from '@/services/model'
 import { useState } from 'react';
+
+const default_items_lenght = 6;
 
 export default function ItemsPage({ defaultItems, search, total, defaultOffset, limit }) {
 
@@ -10,39 +13,57 @@ export default function ItemsPage({ defaultItems, search, total, defaultOffset, 
   const [offset, changeOffset] = useState(defaultOffset);
 
   const getMore = async () => {
-    changeOffset(offset + 4)
+    changeOffset(offset + default_items_lenght)
     const response = await fetch(`/api/items?search=${search}&offset=${offset}&limit=${limit}`)
     const newItems = await response.json()
     addItems([...items, ...newItems.items])
   }
 
   return (
-    <>
+    <main className='container mt-3'>
       <Head>
         <title>Create Next App - Items</title>
       </Head>
-      <h1>Items page {search}</h1>
-      <p>Total: {total} - Offset: {offset} - Limit: {limit} - Display: {items.length}</p>
-      {
-        items.length === 0 ? ( <h1>No hay resultados</h1> )
-        : (
-          <>
-            <ul> {items.map((item, index) => <ItemComponent index={index} key={item.id} data={item} />)} </ul>
-            {
-              offset >= total - defaultOffset ? ( <span>No hay más resultados</span> )
-              : ( <button type='button' onClick={ getMore }>Ver más</button> )
-            }
-          </>
-        )
-      }
-    </>
+      <div className='row'>
+        <AsideComponent
+          search={search}
+          total={total}
+          className='col-12 col-md-3'
+        />
+        <section className='col-12 col-md-9'>
+
+          { items.length === 0 ? (
+            <h2 className='text-center mt-5 text-light'>No hay resultados</h2>
+          ) : null }
+
+          { items.length != 0 ? ( <>
+            <div className='row align-items-stretch my-n3'>
+              { items.map(item => 
+                <div key={item.id} className="col-6 col-lg-4 py-3">
+                  <ItemComponent data={item} />
+                </div>
+              )}
+            </div>
+
+            <div className='my-4 d-flex d-flex justify-content-center'>
+              { offset >= total - defaultOffset ? (
+                <span className='text-light text-center'>No hay más resultados</span>
+              ) : (
+                <button type='button' className='btn btn-link' onClick={ getMore }>Cargar más</button>
+              )}
+            </div>
+          </> ) : null}
+
+        </section>
+      </div>
+    </main>
   )
 }
 
 export async function getServerSideProps({ query }) {
   const { search } = query
   const offset = 0
-  const limit = 4
+  const limit = default_items_lenght
 
   const response = await searchItems(search, offset, limit)
   const { results, paging } = await response.json()
@@ -53,7 +74,7 @@ export async function getServerSideProps({ query }) {
       defaultItems: items,
       search: query.search,
       total: paging.total,
-      defaultOffset: offset + 4,
+      defaultOffset: offset + default_items_lenght,
       limit: limit
     },
   }

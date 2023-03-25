@@ -1,8 +1,16 @@
 @import "_variables";
 @import "_bootstrap";
 @import "header";
+@import "item";
 
 body {
   background-color: #ededed;
   letter-spacing: 0.05em !important;
+}
+
+.mutted-img {
+  filter: gray; /* IE6-9 */
+  -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+  filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
+  opacity: .5;
 }
