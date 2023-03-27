@@ -26,7 +26,7 @@ export default function HeaderComponent() {
             width={134}
             height={34}
             className="d-none d-md-block"
-            priority={false}
+            priority={true}
           />
           <Image
             alt="Mercado Libre iso logo"
