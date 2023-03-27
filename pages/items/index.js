@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import AsideComponent from '@/components/aside'
-import ListComponent from '@/components/items'
+import ListComponent from '@/components/list'
 
 export default function ItemsPage({ search }) {
 
@@ -18,7 +18,7 @@ export default function ItemsPage({ search }) {
         <section className='col-12 col-md-9'>
           <ListComponent 
             search={search}
-            offset={6}
+            offset={0}
             limit={6}
           />
         </section>
