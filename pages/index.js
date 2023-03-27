@@ -6,8 +6,9 @@ export default function Home() {
       <Head>
         <title>Create Next App - home</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Create Next App</title>
       </Head>
-      <h1>Hola mundo</h1>
+      <h1 role="heading">Hola mundo</h1>
     </>
   )
 }
