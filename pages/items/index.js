@@ -18,7 +18,7 @@ export default function ItemsPage({ search }) {
         <section className='col-12 col-md-9'>
           <ListComponent 
             search={search}
-            offset={0}
+            offset={6}
             limit={6}
           />
         </section>
