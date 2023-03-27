@@ -15,17 +15,17 @@ export default function ItemsComponent({ defaultItems, search, total, defaultOff
 
     return(
         <>
-            { items.length === 0 ? (
+            { items && items.length === 0 ? (
                 <h2 className='text-center mt-5 text-light'>No hay resultados</h2>
             ) : null }
 
-            { items.length != 0 ? ( <>
+            { !items || items.length != 0 ? ( <>
                 <div className='row align-items-stretch my-n3'>
-                { items.map(item => 
+                { items ? items.map(item => 
                     <div key={item.id} className="col-6 col-lg-4 py-3">
                         <ItemComponent data={item} />
                     </div>
-                )}
+                ) : null}
                 </div>
 
                 <div className='my-4 d-flex d-flex justify-content-center'>
