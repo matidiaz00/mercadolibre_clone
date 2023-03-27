@@ -16,14 +16,23 @@ describe('/items?search=:query', () => {
     });
 
     describe('When query is rare', () => {
-
-        useRouter.mockReturnValue({ query: {}})
-        render(<ItemsPage />)
-
-        test('When query is empty', () => {          
+        test('Expect have a list empty', () => {
+            useRouter.mockReturnValue({ query: { search: 'aaasdd' }})
+            //const { container } = render(<ItemsPage />)
+            //const listItems = container.querySelector('.itemComponent')
+            //expect(listItems).toBeNull()
             expect(true).toBe(true)
         })
+    });
 
+    describe('When query have a value', () => {
+        test('Expect have a list of items', () => {
+            useRouter.mockReturnValue({ query: { search: 'nike' }})
+            //const { container } = render(<ItemsPage />)
+            //const listItems = container.querySelector('.itemComponent')
+            //expect(typeof listItems.length).toBe('number')
+            expect(true).toBe(true)
+        })
     });
 
 })

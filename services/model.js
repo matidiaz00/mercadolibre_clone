@@ -20,7 +20,7 @@ const setItems = async data => {
                 amount: item.price ? item.price : null,
                 decimals: item.price ? item.price.toLocaleString("es-ES") : null
             }
-            detail["picture"] = item.thumbnail ? item.thumbnail : null
+            detail["picture"] = item.thumbnail ? item.thumbnail.replace('-I.jpg', '-W.webp') : null
             detail["condition"] = item.condition ? item.condition : null
             detail["free_shipping"] = item.shipping ? item.shipping.free_shipping : null
         }

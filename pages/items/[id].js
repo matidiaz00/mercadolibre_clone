@@ -4,12 +4,19 @@ import { setSepecificItem } from '@/services/model'
 import Head from 'next/head'
 import Image from 'next/image'
 import ShippingIcon from "@/public/ic_shipping@2x.png"
+import SEO from '@/services/SEO.json'
 
 export default function DetailPage({ data }) {
   return (
     <main className='container mt-3 mb-4'>
       <Head>
-        <title>Create Next App - Detail</title>
+        <title>{ data && data.title ? data.title : null } | MercadoLibre 📦</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+        <meta name="description" content={SEO.description} data-head-react="true" />
+        <meta name="twitter:title" content={SEO.title} />
+        <meta name="twitter:description" content={SEO.description} />
+        <meta name="og:title" property="og:title" content={SEO.title} />
+        <meta name="og:description" property="og:description" content={SEO.description} />
       </Head>
       <div className='bg-white rounded border row py-md-3 m-0'>
         <div className='col-12 px-md-3 p-4 d-md-none'>
