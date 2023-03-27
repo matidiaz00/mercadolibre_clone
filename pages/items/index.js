@@ -1,12 +1,8 @@
 import Head from 'next/head'
 import AsideComponent from '@/components/aside'
-import ItemsComponent from '@/components/items'
-import { searchItems } from '@/services/config';
-import { setArrItems } from '@/services/model';
+import ListComponent from '@/components/items'
 
-const default_items_lenght = 6;
-
-export default function ItemsPage({ defaultItems, search, total, defaultOffset, limit }) {
+export default function ItemsPage({ search }) {
 
   return (
     <main className='container mt-3'>
@@ -16,16 +12,14 @@ export default function ItemsPage({ defaultItems, search, total, defaultOffset, 
       <div className='row'>
         <AsideComponent
           search={search}
-          total={total}
+          total={2000}
           className='col-12 col-md-3'
         />
         <section className='col-12 col-md-9'>
-          <ItemsComponent
-            defaultItems={defaultItems}
+          <ListComponent 
             search={search}
-            total={total}
-            defaultOffset={defaultOffset}
-            limit={limit}
+            offset={0}
+            limit={6}
           />
         </section>
       </div>
@@ -45,20 +39,10 @@ export async function getServerSideProps({ query }) {
   }
 
   const { search } = query
-  const offset = 0
-  const limit = default_items_lenght
-
-  const response = await searchItems(search, offset, limit)
-  const { results, paging } = await response.json()
-  const { items } = await setArrItems(results)
 
   return {
     props: {
-      defaultItems: items,
       search: search,
-      total: paging.total,
-      defaultOffset: offset + default_items_lenght,
-      limit: limit
     },
   }
 }
