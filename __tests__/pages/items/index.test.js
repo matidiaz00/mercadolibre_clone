@@ -16,7 +16,7 @@ describe('/items?search=:query', () => {
     });
 
     describe('When query is rare', () => {
-        test('Expect have a list empty', () => {
+        test('Expect have a list empty', async () => {
             useRouter.mockReturnValue({ query: { search: 'aaasdd' }})
             //const { container } = render(<ItemsPage />)
             //const listItems = container.querySelector('.itemComponent')
@@ -26,10 +26,11 @@ describe('/items?search=:query', () => {
     });
 
     describe('When query have a value', () => {
-        test('Expect have a list of items', () => {
+        test('Expect have a list of items', async () => {
             useRouter.mockReturnValue({ query: { search: 'nike' }})
             //const { container } = render(<ItemsPage />)
             //const listItems = container.querySelector('.itemComponent')
+            //console.log("list: ", listItems)
             //expect(typeof listItems.length).toBe('number')
             expect(true).toBe(true)
         })
