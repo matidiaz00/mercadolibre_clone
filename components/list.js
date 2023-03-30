@@ -5,26 +5,30 @@ export default function ListComponent ({ defaultItems, search, total, limit }) {
 
     const [items, setItems] = useState(defaultItems)
     const [isLoading, setLoading] = useState(false)
-    const [offset, changeOffset] = useState(6);
+    const [offset, changeOffset] = useState(limit);
 
     useEffect(() => {
         setLoading(true)
+        const last_search = localStorage.getItem("last_search")
+        if (last_search != search) {
+            changeOffset(limit)
+            localStorage.setItem("last_search", search);
+        }
         fetch( `/api/items?search=${search}&offset=${offset}&limit=${limit}` )
         .then(res => res.json())
         .then(newItems => {
-            setItems([...items, ...newItems.items])
+            if (last_search != search) {
+                setItems([])
+                setItems(newItems.items)
+            } else setItems([...items, ...newItems.items])
             setLoading(false)
         })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [limit, offset, search])
+    }, [offset, search])
 
     return (
         <>
-            { !items || items.length === 0 ? (
-                <h2 className='text-center mt-5 text-light'>Lo sentimos, no hay resultados</h2>
-            ) : null }
-
-            { !items || items.length != 0 ? ( <>
+            { items && items.length != 0 ? ( <>
                 <div className='row align-items-stretch my-n3'>
                 { items ? items.map(item => 
                     <div key={item.id} className="itemComponent col-6 col-lg-4 py-3">

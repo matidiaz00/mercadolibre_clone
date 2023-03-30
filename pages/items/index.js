@@ -2,10 +2,11 @@ import Head from 'next/head'
 import AsideComponent from '@/components/aside'
 import ListComponent from '@/components/list'
 import SEO from '@/services/SEO.json'
+import { useRouter } from 'next/router'
 
-const default_items_lenght = 6;
-
-export default function ItemsPage({ search }) {
+export default function ItemsPage() {
+  const router = useRouter()
+  const { search } = router.query
   return (
     <main className='container mt-3'>
       <Head>
@@ -28,7 +29,7 @@ export default function ItemsPage({ search }) {
             defaultItems={[]}
             search={search}
             total={2000}
-            limit={default_items_lenght}
+            limit={6}
           />
         </section>
       </div>
@@ -47,12 +48,8 @@ export async function getServerSideProps({ query }) {
     }
   }
 
-  const { search } = query
-
   return {
-    props: {
-      search: search,
-    },
+    props: {}
   }
 
   /*
